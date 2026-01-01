@@ -1,0 +1,112 @@
+# ===============================
+# Virtual Environments
+# ===============================
+.venv/
+venv/
+ENV/
+env/
+
+# ===============================
+# Python Cache / Bytecode
+# ===============================
+pycache/
+*.py[cod]
+*$py.class
+
+# ===============================
+# Distribution / Packaging
+# ===============================
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ===============================
+# Jupyter Notebooks
+# ===============================
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# ===============================
+# IDE / Editor Settings
+# ===============================
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.iml
+
+# ===============================
+# OS / System Files
+# ===============================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===============================
+# Environment Variables / Secrets
+# ===============================
+.env
+.env.*
+*.pem
+*.key
+
+# ===============================
+# Logs
+# ===============================
+*.log
+logs/
+
+# ===============================
+# RAG / Vector Store Artifacts
+# ===============================
+vector_store/
+faiss_index/
+chroma/
+*.faiss
+*.index
+
+# ===============================
+# Data Files (keep structure, not data)
+# ===============================
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+data/
+
+# ===============================
+# Model Files
+# ===============================
+*.pt
+*.pth
+*.h5
+*.onnx
+*.joblib
+*.pkl
+
+# ===============================
+# Test / Coverage Reports
+# ===============================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ===============================
+# Temporary / Backup Files
+# ===============================
+*.tmp
+*.bak
+*.swp
+
+# ===============================
+# Streamlit / Gradio
+# ===============================
+.streamlit/
+gradio_cached_examples/
+
+# ===============================
+# GitHub Actions Artifacts
+# ===============================
+*.out
+*.cache
