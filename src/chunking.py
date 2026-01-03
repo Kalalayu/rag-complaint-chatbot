@@ -3,7 +3,6 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 def chunk_text(text, chunk_size=500, overlap=50):
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
-        chunk_overlap=overlap,
-        separators=["\n\n", "\n", ".", " "]
+        chunk_overlap=overlap
     )
     return splitter.split_text(text)
