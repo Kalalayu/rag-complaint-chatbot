@@ -11,3 +11,4 @@ VECTOR_STORE = BASE_DIR / "vector_store"
 # Ensure directories exist
 DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
 VECTOR_STORE.mkdir(parents=True, exist_ok=True)
+

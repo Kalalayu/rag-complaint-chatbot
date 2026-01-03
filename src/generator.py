@@ -1,16 +1,27 @@
 # src/generator.py
 from transformers import pipeline
 
-# Use text2text-generation for T5 models
+# Load small CPU-friendly model
 llm = pipeline(
-    "text2text-generation",
-    model="google/flan-t5-small",  # small model, works on CPU
+    "text-generation",
+    model="google/flan-t5-small",  # tiny enough for CPU
     do_sample=True,
     temperature=0.7,
-    max_new_tokens=80
+    max_new_tokens=100
 )
 
-def generate_answer(question: str) -> str:
+def generate_answer(question: str):
+    """
+    Generate an answer and dummy sources (for now).
+    """
     prompt = f"Answer the following question clearly:\n\n{question}\nAnswer:"
     output = llm(prompt)
-    return output[0]["generated_text"]
+    answer = output[0]["generated_text"]
+    
+    # Dummy sources - you can replace with actual RAG retrieval
+    sources = [
+        "Source 1: Company complaint log",
+        "Source 2: Customer email records"
+    ]
+    
+    return answer, sources
