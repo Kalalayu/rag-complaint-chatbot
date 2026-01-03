@@ -8,7 +8,7 @@ llm = pipeline(
     model="google/flan-t5-small",
     do_sample=True,
     temperature=0.7,
-    max_new_tokens=80
+    max_new_tokens=100
 )
 
 def generate_answer(question: str) -> str:
@@ -17,4 +17,12 @@ def generate_answer(question: str) -> str:
     """
     prompt = f"Answer the following question clearly:\n\n{question}\nAnswer:"
     output = llm(prompt)
-    return output[0]["generated_text"]
+    answer = output[0]["generated_text"]
+    
+    # Dummy sources - you can replace with actual RAG retrieval
+    sources = [
+        "Source 1: Company complaint log",
+        "Source 2: Customer email records"
+    ]
+    
+    return answer, sources
