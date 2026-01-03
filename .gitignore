@@ -9,7 +9,7 @@ env/
 # ===============================
 # Python Cache / Bytecode
 # ===============================
-pycache/
+__pycache__/
 *.py[cod]
 *$py.class
 
@@ -25,14 +25,11 @@ dist/
 # Jupyter Notebooks
 # ===============================
 .ipynb_checkpoints/
-*.nbconvert.ipynb
 
 # ===============================
 # IDE / Editor Settings
 # ===============================
-.vscode/*
-!.vscode/settings.json
-!.vscode/extensions.json
+.vscode/
 .idea/
 *.iml
 
@@ -67,16 +64,15 @@ chroma/
 *.index
 
 # ===============================
-# Data Files (keep structure, not data)
+# Data Files (keep structure only)
 # ===============================
 data/raw/*
 data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
-data/
 
 # ===============================
-# Model Files
+# Model Files (NEVER push these)
 # ===============================
 *.pt
 *.pth
@@ -84,6 +80,7 @@ data/
 *.onnx
 *.joblib
 *.pkl
+*.safetensors
 
 # ===============================
 # Test / Coverage Reports
@@ -100,10 +97,10 @@ htmlcov/
 *.swp
 
 # ===============================
-# Streamlit / Gradio
+# Gradio / Streamlit Artifacts
 # ===============================
-.streamlit/
 gradio_cached_examples/
+.streamlit/
 
 # ===============================
 # GitHub Actions Artifacts
