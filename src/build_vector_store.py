@@ -1,29 +1,33 @@
 import pandas as pd
 from src.config import DATA_PROCESSED, VECTOR_STORE
-from src.preprocessing import clean_text
 from src.chunking import chunk_text
 from src.embedding import create_vector_store
+from src.sampling import stratified_sample
 
-# Load data
+
+# Load cleaned dataset from Task 1
 df = pd.read_csv(DATA_PROCESSED / "filtered_complaints.csv")
 
-# Clean text
-df["clean_text"] = df["clean_complaint"].apply(clean_text)
+if df.empty:
+    raise RuntimeError("Cleaned dataset is empty. Run Task 1 first.")
 
-chunks = []
-metadata = []
+# df = pd.read_csv(DATA_PROCESSED / "filtered_complaints.csv")
+
+df = stratified_sample(
+    df,
+    group_col="Product",
+    n_samples=12000
+)
+
+texts, metadata = [], []
 
 for _, row in df.iterrows():
-    parts = chunk_text(row["clean_text"])
-    for i, chunk in enumerate(parts):
-        chunks.append(chunk)
+    chunks = chunk_text(row["clean_complaint"])
+    for i, chunk in enumerate(chunks):
+        texts.append(chunk)
         metadata.append({
-            "complaint_id": row.get("Complaint ID", ""),
             "product": row["Product"],
             "chunk_id": i
         })
-if df.empty:
-    raise ValueError("Input dataset is empty. Check preprocessing step.")
-
-# Create vector store
-create_vector_store(chunks, metadata, VECTOR_STORE)
+create_vector_store(texts, metadata, VECTOR_STORE)
+print("Vector store successfully created.")
