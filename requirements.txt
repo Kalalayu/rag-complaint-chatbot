@@ -10,3 +10,7 @@ chromadb
 tqdm
 python-dotenv
 gradio
+transformers
+sentence-transformers
+faiss-cpu      # or faiss-gpu if availabl
+torch
