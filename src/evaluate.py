@@ -1,38 +1,33 @@
 # src/evaluate.py
-import pandas as pd
-from src.generator import generate_answer
 
-# -------------------------
-# STEP 1: Define evaluation questions
-# -------------------------
+import pandas as pd
+from src.rag_pipeline import run_rag
+
 evaluation_questions = [
-    "Why did customer X complain about their loan?",
+    "Why did customers complain about loans?",
     "Which complaints are related to delayed payments?",
     "Are there recurring issues with the mobile app?",
-    "What was the main reason for complaints in January 2025?",
-    "Which complaints were resolved successfully?"
+    "What are the most common complaint themes?",
+    "Which complaints mention resolution?"
 ]
 
-evaluation_results = []
+results = []
 
-# -------------------------
-# STEP 2: Generate answers
-# -------------------------
 for q in evaluation_questions:
-    print(f"\nQuestion: {q}")
-    answer = generate_answer(q)  # call your generator
-    print("Answer:", answer)
+    print(f"\n❓ Question: {q}")
 
-    evaluation_results.append({
+    output = run_rag(q)
+
+    print("✅ Answer:", output["answer"])
+    print("📚 Sources used:", len(output["sources"]))
+
+    results.append({
         "Question": q,
-        "Generated Answer": answer,
-        "Quality Score": None,
-        "Comments": ""
+        "Answer": output["answer"],
+        "Num Sources": len(output["sources"])
     })
 
-# -------------------------
-# STEP 3: Save evaluation table
-# -------------------------
-df = pd.DataFrame(evaluation_results)
-df.to_csv("evaluation_table.csv", index=False)
-print("\nEvaluation table saved as evaluation_table.csv")
+df = pd.DataFrame(results)
+df.to_csv("evaluation_results.csv", index=False)
+
+print("\n📄 evaluation_results.csv saved")

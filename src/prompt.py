@@ -1,14 +1,16 @@
-def build_prompt(question, retrieved_chunks):
-    context = "\n".join(retrieved_chunks)
-    prompt = f"""
-You are a financial analyst assistant for CrediTrust. Your task is to answer questions about customer complaints. 
-Use only the following retrieved complaint excerpts to answer the user's question. 
-If the context doesn't contain the answer, state that you don't have enough information.
+def build_prompt(question: str, chunks: list) -> str:
+    context = "\n\n".join(
+        f"- {c['text']}" for c in chunks
+    )
 
-Context: {context}
+    return f"""
+You are a financial complaints analysis assistant.
 
-Question: {question}
+Context:
+{context}
 
-Answer:
+Question:
+{question}
+
+Answer concisely and factually.
 """
-    return prompt
