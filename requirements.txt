@@ -14,3 +14,7 @@ transformers
 sentence-transformers
 faiss-cpu      # or faiss-gpu if availabl
 torch
+langchain
+langchain-text-splitters
+pyarrow
+
