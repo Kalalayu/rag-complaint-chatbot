@@ -1,10 +1,21 @@
+# src/generator.py
+
 from transformers import pipeline
 
-# -------------------------
-# Use text2text-generation for T5
-# -------------------------
-llm = pipeline(
+print("🚀 Loading T5 model...")
+generator = pipeline(
     "text2text-generation",
+    model="google/flan-t5-base",
+    device=-1  # CPU
+)
+
+def generate_answer(prompt: str) -> str:
+    output = generator(
+        prompt,
+        max_length=256,
+        do_sample=False
+    )
+    return output[0]["generated_text"]
     model="google/flan-t5-small",
     do_sample=True,
     temperature=0.7,
